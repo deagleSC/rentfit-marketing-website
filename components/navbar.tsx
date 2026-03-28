@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import {
   Menu,
@@ -34,7 +33,11 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { RentfitLogo } from "@/components/brand/rentfit-logo";
+import { getAppUrl, SITE_NAME } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+
+const APP_URL = getAppUrl();
 
 interface NavbarProps {
   className?: string;
@@ -173,20 +176,20 @@ export function Navbar({ className }: NavbarProps) {
           name: "Features",
           href: "/#features",
           description:
-            "Discover powerful AI-powered chess analysis tools and insights.",
+            "Conversational search, map-based listings, and AI-assisted discovery.",
           icon: Sparkles,
         },
         {
           name: "Pricing",
           href: "/#pricing",
           description:
-            "Choose the perfect plan for your chess improvement journey.",
+            "See how RentFit is rolling out access for renters and owners.",
           icon: DollarSign,
         },
         {
           name: "FAQ",
           href: "/#faq",
-          description: "Find answers to common questions about Chessvine.",
+          description: "Common questions about RentFit and how search works.",
           icon: HelpCircle,
         },
       ],
@@ -198,7 +201,7 @@ export function Navbar({ className }: NavbarProps) {
           name: "About",
           href: "/about",
           description:
-            "Learn about our mission, values, and the team behind Chessvine.",
+            "Why we built RentFit and how we think about rentals.",
           icon: Info,
         },
         {
@@ -221,7 +224,7 @@ export function Navbar({ className }: NavbarProps) {
         {
           name: "Terms of Service",
           href: "/terms",
-          description: "Review the terms and conditions for using Chessvine.",
+          description: "Review the terms and conditions for using RentFit.",
           icon: FileText,
         },
       ],
@@ -249,14 +252,8 @@ export function Navbar({ className }: NavbarProps) {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="/app-logo.png"
-              alt="Chessvine"
-              width={32}
-              height={32}
-              className="h-8 w-8"
-            />
-            <span className="font-thin text-xl">Chessvine</span>
+            <RentfitLogo size={32} className="size-8 rounded-lg" />
+            <span className="font-thin text-xl">{SITE_NAME}</span>
           </Link>
         </motion.div>
 
@@ -311,17 +308,13 @@ export function Navbar({ className }: NavbarProps) {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="hidden md:flex items-center gap-4"
         >
-          <ModeToggle />
           <Button size="sm" asChild>
-            <Link href="https://chessvine-web-881017844394.asia-south1.run.app/">
-              Start Free Preview
-            </Link>
+            <Link href={APP_URL}>Open app</Link>
           </Button>
         </motion.div>
 
         {/* Mobile Menu */}
         <div className="flex md:hidden items-center gap-2">
-          <ModeToggle />
           <Drawer
             open={isMobileMenuOpen}
             onOpenChange={setIsMobileMenuOpen}
@@ -371,10 +364,10 @@ export function Navbar({ className }: NavbarProps) {
                 <div className="flex flex-col gap-2 pt-4 border-t">
                   <Button size="sm" asChild className="w-full">
                     <Link
-                      href="https://chessvine-web-881017844394.asia-south1.run.app/"
+                      href={APP_URL}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Start Free Preview
+                      Open app
                     </Link>
                   </Button>
                 </div>

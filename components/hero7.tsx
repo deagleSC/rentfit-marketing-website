@@ -5,7 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 
+import { getAppUrl, SITE_DESCRIPTION_LONG } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+
+const DEFAULT_APP_URL = getAppUrl();
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -30,11 +33,11 @@ interface Hero7Props {
 }
 
 const Hero7 = ({
-  heading = "Checkmate Your Limits with AI-Powered Chess Improvement",
-  description = "Transform your chess game with AI-driven analysis, customized puzzles, and personalized learning paths. Perfect for serious players committed to improvement.",
+  heading = "Ask RentFit. Explore rentals on the map.",
+  description = SITE_DESCRIPTION_LONG,
   button = {
-    text: "Start Free Preview",
-    url: "https://chessvine-web-881017844394.asia-south1.run.app/",
+    text: "Open app",
+    url: DEFAULT_APP_URL,
   },
   reviews,
   className,

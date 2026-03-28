@@ -7,60 +7,40 @@ import { Faq1 } from "@/components/faq1";
 import { ContactSection } from "@/components/contact-section";
 import { Footer2 } from "@/components/footer2";
 import { StructuredData } from "@/components/structured-data";
+import {
+  getAppUrl,
+  getMarketingSiteUrl,
+  SITE_DESCRIPTION,
+  SITE_DESCRIPTION_LONG,
+  SITE_NAME,
+  SITE_TAGLINE,
+} from "@/lib/site-config";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chessvine.com";
+const siteUrl = getMarketingSiteUrl();
+const appUrl = getAppUrl();
 
 export const metadata: Metadata = {
-  title: "Chessvine - Checkmate your limits | AI Chess Analysis Platform",
-  description:
-    "Transform your chess game with AI-driven analysis, customized puzzles, and personalized learning paths. Upload PGN files and get detailed insights to improve your chess skills.",
+  title: `${SITE_NAME} — ${SITE_DESCRIPTION}`,
+  description: SITE_DESCRIPTION_LONG,
   keywords: [
-    "chess analysis",
-    "chess AI",
-    "PGN analyzer",
-    "chess game analysis",
-    "chess training",
-    "chess puzzles",
-    "chess improvement",
-    "chess insights",
-    "chess strategy",
-    "chess tactics",
-    "online chess",
-    "chess platform",
-    "AI chess",
-    "chess learning",
+    "RentFit",
+    "rental search",
+    "rental listings map",
+    "AI rental assistant",
+    "list rental India",
   ],
   openGraph: {
-    title: "Chessvine - Checkmate your limits | AI Chess Analysis Platform",
-    description:
-      "Transform your chess game with AI-driven analysis, customized puzzles, and personalized learning paths. Upload PGN files and get detailed insights to improve your chess skills.",
+    title: `${SITE_NAME} — ${SITE_DESCRIPTION}`,
+    description: SITE_DESCRIPTION_LONG,
     url: siteUrl,
-    siteName: "Chessvine",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        width: 1200,
-        height: 630,
-        alt: "Chessvine - AI Chess Analysis Platform",
-        type: "image/png",
-      },
-    ],
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Chessvine - Checkmate your limits | AI Chess Analysis Platform",
-    description:
-      "Transform your chess game with AI-driven analysis, customized puzzles, and personalized learning paths.",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        alt: "Chessvine - AI Chess Analysis Platform",
-      },
-    ],
-    creator: "@chessvine",
-    site: "@chessvine",
+    card: "summary",
+    title: `${SITE_NAME} — ${SITE_DESCRIPTION}`,
+    description: SITE_DESCRIPTION_LONG,
   },
   alternates: {
     canonical: siteUrl,
@@ -70,45 +50,33 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Chessvine",
+  name: SITE_NAME,
   url: siteUrl,
-  logo: `${siteUrl}/app-logo.png`,
-  description:
-    "AI-powered chess game analysis platform helping players improve their game through AI-driven insights and personalized learning.",
-  sameAs: [],
+  description: SITE_DESCRIPTION_LONG,
+  sameAs: [] as string[],
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Chessvine",
+  name: SITE_NAME,
   url: siteUrl,
-  description:
-    "AI-powered chess game analysis platform. Upload your PGN files, get detailed insights, practice puzzles, and improve your chess game.",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${siteUrl}/?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
+  description: SITE_DESCRIPTION_LONG,
 };
 
 const softwareApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Chessvine",
-  applicationCategory: "Game",
+  name: SITE_NAME,
+  applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   offers: {
     "@type": "Offer",
     price: "0",
     priceCurrency: "USD",
   },
-  description:
-    "AI-powered chess game analysis platform. Upload your PGN files, get detailed insights, practice puzzles, and improve your chess game.",
-  url: siteUrl,
+  description: SITE_DESCRIPTION_LONG,
+  url: appUrl,
 };
 
 const faqSchema = {
@@ -117,38 +85,70 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is Chessvine?",
+      name: "What is RentFit?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Chessvine is an AI-powered chess improvement platform that helps serious players analyze their games, practice with customized puzzles, and follow personalized learning paths. Upload your PGN files to get detailed AI-driven insights into your gameplay, mistakes, and strategic opportunities.",
+        text: "RentFit is a rental marketplace experience: you can search in natural language, see listings on a map, chat with an assistant to refine your search, and (as an owner) publish listings. It pairs the product flows from the RentFit web app with a simple marketing site.",
       },
     },
     {
       "@type": "Question",
-      name: "How does the AI game analysis work?",
+      name: 'What does "Ask RentFit" mean?',
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Our advanced AI engine analyzes every move in your uploaded games, identifying critical moments, tactical mistakes, and strategic improvements. The analysis breaks down key positions, evaluates move quality, and provides actionable recommendations to help you understand where you can improve.",
+        text: "In the app, you describe what you are looking for in everyday language—similar to the Ask RentFit landing on /search. You then continue in a map plus chat workspace while the assistant helps you explore listings.",
       },
     },
     {
       "@type": "Question",
-      name: "What file format do you support?",
+      name: "Do I need an account?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Chessvine supports PGN (Portable Game Notation) files, which is the standard format for chess games. You can upload PGN files from any chess platform, including Chess.com, Lichess, chess24, or games you've saved manually.",
+        text: "The RentFit app uses accounts so your session, chats, and profile preferences (such as default city) can be saved securely.",
       },
     },
     {
       "@type": "Question",
-      name: "Is Chessvine really free?",
+      name: "Is RentFit only for certain cities?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes! Chessvine is currently in free preview, which means all features are available at no cost. This includes unlimited game analysis, AI-powered insights, customized puzzles, and personalized learning paths.",
+        text: "The product is built around service areas such as Bangalore, Mumbai, and Kolkata; you can still ask about other places in chat depending on listings and data coverage.",
       },
     },
   ],
 };
+
+const footerLogo = {
+  url: "/",
+  src: "/logo.png",
+  alt: SITE_NAME,
+  title: SITE_NAME,
+} as const;
+
+const footerMenu = [
+  {
+    title: "Product",
+    links: [
+      { text: "Features", url: "/#features" },
+      { text: "Pricing", url: "/#pricing" },
+      { text: "FAQ", url: "/#faq" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { text: "About", url: "/about" },
+      { text: "Contact", url: "/#contact" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { text: "Privacy Policy", url: "/privacy" },
+      { text: "Terms of Service", url: "/terms" },
+    ],
+  },
+];
 
 export default function Home() {
   return (
@@ -160,182 +160,137 @@ export default function Home() {
       <div className="min-h-screen">
         <Navbar />
         <Hero7
-          heading="Checkmate Your Limits with AI-Driven Chess Improvement"
-          description="Transform your chess game with AI-driven analysis, customized puzzles, and personalized learning paths. Perfect for serious players committed to improvement."
+          heading="Ask RentFit — find rentals with chat and a map"
+          description={SITE_DESCRIPTION_LONG}
           button={{
-            text: "Start Free Preview",
-            url: "https://chessvine-web-881017844394.asia-south1.run.app/",
+            text: "Open app",
+            url: appUrl,
           }}
           reviews={null}
         />
 
-        {/* Feature 1: AI Game Analysis - Image on right, text on left */}
         <Feature1
           id="features"
-          title="AI-Driven Game Analysis"
-          description="Upload your PGN files and get detailed AI-driven insights into your games. Understand your mistakes, identify patterns, and discover opportunities for improvement. Our advanced analysis engine breaks down every move, highlighting critical moments and strategic decisions."
-          imageSrcLight="/assets/analysis-light.jpeg"
-          imageSrcDark="/assets/analysis-dark.jpeg"
-          imageAlt="AI Game Analysis"
+          title="Natural-language search"
+          description="Start from the same idea as the app’s search landing: describe budget, area, and lifestyle needs. RentFit is built to turn that into a session where you keep refining next to the map."
+          imageSrcLight="/assets/search.png"
+          imageSrcDark="/assets/search.png"
+          imageAlt="RentFit search — describe what you want in plain language"
           imagePosition="right"
           variant="default"
         />
 
-        {/* Feature 2: Customized Puzzles - Image on left, text on right */}
         <Feature1
-          title="Customized Puzzles from Your Games"
-          description="Practice with puzzles automatically generated from your actual game mistakes. Each puzzle is tailored to your playing style and weaknesses, helping you improve where it matters most. Difficulty levels adapt to your skill, ensuring continuous growth."
-          imageSrcLight="/assets/puzzles-light.jpeg"
-          imageSrcDark="/assets/puzzles-dark.jpeg"
-          imageAlt="Customized Puzzles"
+          title="Map + chat workspace"
+          description="Once you send your first prompt, you land on the map and chat view used in the product—so you can see where listings sit and iterate with the assistant."
+          imageSrcLight="/assets/chat.png"
+          imageSrcDark="/assets/chat.png"
+          imageAlt="RentFit map and chat workspace"
           imagePosition="left"
           variant="muted"
         />
 
-        {/* Feature 3: Personalized Learning Path - Image on right, text on left */}
         <Feature1
-          title="Personalized Learning Path"
-          description="Get a customized learning path designed specifically for your chess journey. Our AI analyzes your game patterns, identifies your strengths and weaknesses, then automatically creates a structured improvement plan tailored to your skill level. Track your progress and see measurable results over time."
-          imageSrcLight="/assets/dashboard-light.jpeg"
-          imageSrcDark="/assets/dashboard-dark.jpeg"
-          imageAlt="Personalized Learning Path"
+          title="Listings that stay in the conversation"
+          description="Matching homes appear as rich cards with photos, rent, and the details that matter—right next to your thread and the map, so you can compare options without tab-hopping."
+          imageSrcLight="/assets/image.png"
+          imageSrcDark="/assets/image.png"
+          imageAlt="RentFit listing results alongside chat"
           imagePosition="right"
           variant="default"
         />
 
         <Pricing4
+          id="pricing"
           title="Pricing"
-          description="Chessvine is currently in free preview. Pricing plans will be introduced in the future as we continue to enhance the platform."
+          description="RentFit is in active development. The app is free to try while we validate search, listings, and owner workflows—paid tiers may arrive later."
           plans={[
             {
               name: "Pro",
-              badge: "Pro",
-              monthlyPrice: "$10",
-              yearlyPrice: "$100",
+              badge: "Coming later",
+              monthlyPrice: "—",
+              yearlyPrice: "—",
               features: [
-                "Unlimited games",
-                "Advanced analysis",
-                "Advanced puzzles",
+                "Reserved for future paid features",
+                "Same app experience until launch",
+                "No charge while in preview",
               ],
-              buttonText: "Get Started",
+              buttonText: "Notify me",
             },
             {
-              name: "Free",
-              badge: "Free Preview",
-              monthlyPrice: "$0",
-              yearlyPrice: "$0",
+              name: "Preview",
+              badge: "Current",
+              monthlyPrice: "₹0",
+              yearlyPrice: "₹0",
               features: [
-                "Unlimited game analysis",
-                "AI-powered insights",
-                "Customized puzzles",
-                "Personalized learning paths",
+                "Ask RentFit search and chat",
+                "Map-based listing discovery",
+                "Create an account and save preferences",
+                "Owner listing flows (where enabled)",
               ],
-              buttonText: "Start Free Preview",
+              buttonText: "Open app",
             },
             {
-              name: "Elite",
-              badge: "Elite",
-              monthlyPrice: "$20",
-              yearlyPrice: "$200",
+              name: "Teams",
+              badge: "Planned",
+              monthlyPrice: "—",
+              yearlyPrice: "—",
               features: [
-                "Unlimited games",
-                "Advanced analysis",
-                "Advanced puzzles",
+                "For agencies and multi-property owners",
+                "Details to be announced",
               ],
-              buttonText: "Get Started",
+              buttonText: "Contact us",
             },
           ]}
         />
 
         <Faq1
-          heading="Frequently Asked Questions"
+          id="faq"
+          heading="Frequently asked questions"
           items={[
             {
               id: "faq-1",
-              question: "What is Chessvine?",
+              question: "What is RentFit?",
               answer:
-                "Chessvine is an AI-powered chess improvement platform that helps serious players analyze their games, practice with customized puzzles, and follow personalized learning paths. Upload your PGN files to get detailed AI-driven insights into your gameplay, mistakes, and strategic opportunities.",
+                "RentFit helps you discover rental properties using conversational search, a map, and an AI assistant—aligned with the `/search` experience in the RentFit web app. Owners can participate in the same ecosystem by listing homes.",
             },
             {
               id: "faq-2",
-              question: "How does the AI game analysis work?",
+              question: 'What does "Ask RentFit" mean?',
               answer:
-                "Our advanced AI engine analyzes every move in your uploaded games, identifying critical moments, tactical mistakes, and strategic improvements. The analysis breaks down key positions, evaluates move quality, and provides actionable recommendations to help you understand where you can improve.",
+                "It is the product headline on the app’s search page: you type what you want in plain language, then continue in the map and chat workspace while the assistant responds.",
             },
             {
               id: "faq-3",
-              question: "What file format do you support?",
+              question: "Where does the assistant get listings?",
               answer:
-                "Chessvine supports PGN (Portable Game Notation) files, which is the standard format for chess games. You can upload PGN files from any chess platform, including Chess.com, Lichess, chess24, or games you've saved manually.",
+                "The live app uses your RentFit backend and listing data. Results depend on what is published in the service and the tools the assistant is configured to call.",
             },
             {
               id: "faq-4",
-              question: "How are the puzzles generated?",
+              question: "Which cities are supported?",
               answer:
-                "Puzzles are automatically generated from your actual game mistakes. Our AI identifies tactical opportunities and critical positions from your analyzed games, then creates customized puzzles tailored to your playing style and weaknesses. Each puzzle helps you practice the exact skills you need to improve.",
+                "The backend includes service areas such as Bangalore, Mumbai, and Kolkata. Your profile can store a default city; you can still ask about other locations in conversation.",
             },
             {
               id: "faq-5",
-              question: "What is a personalized learning path?",
+              question: "Do I need an account?",
               answer:
-                "A personalized learning path is an AI-generated improvement plan created specifically for you. Based on your game analyses, our AI identifies your strengths and weaknesses, then creates a structured learning plan with recommended focus areas, practice exercises, and skill development goals tailored to your current skill level.",
-            },
-            {
-              id: "faq-6",
-              question: "Is Chessvine really free?",
-              answer:
-                "Yes! Chessvine is currently in free preview, which means all features are available at no cost. This includes unlimited game analysis, AI-powered insights, customized puzzles, and personalized learning paths. We'll introduce pricing plans in the future as we continue to enhance the platform.",
-            },
-            {
-              id: "faq-7",
-              question: "Do I need to create an account?",
-              answer:
-                "Yes, creating a free account is required to use Chessvine. This allows us to save your game analyses, track your progress, generate personalized puzzles, and maintain your learning path. You can sign up quickly using email or Google OAuth.",
-            },
-            {
-              id: "faq-8",
-              question: "How accurate is the AI analysis?",
-              answer:
-                "Our AI analysis engine uses advanced chess algorithms and machine learning models trained on millions of games. It provides highly accurate evaluations of positions, move quality, and tactical opportunities. The analysis is designed to help you understand your games at a deeper level and identify areas for improvement.",
+                "Yes for the full app: registration and login match the rentfit-v1-be API with secure session cookies, the same pattern described in the product README.",
             },
           ]}
         />
 
-        <ContactSection />
+        <ContactSection
+          title="Contact"
+          description="Questions about RentFit or partnerships? Send a note—we read every message."
+        />
 
         <Footer2
-          logo={{
-            src: "/app-logo.png",
-            alt: "Chessvine",
-            title: "Chessvine",
-            url: "/",
-          }}
-          tagline="Checkmate your limits with AI-driven chess improvement."
-          menuItems={[
-            {
-              title: "Product",
-              links: [
-                { text: "Features", url: "#features" },
-                { text: "Pricing", url: "#pricing" },
-                { text: "FAQ", url: "#faq" },
-              ],
-            },
-            {
-              title: "Company",
-              links: [
-                { text: "About", url: "/about" },
-                { text: "Contact", url: "#contact" },
-              ],
-            },
-            {
-              title: "Legal",
-              links: [
-                { text: "Privacy Policy", url: "/privacy" },
-                { text: "Terms of Service", url: "/terms" },
-              ],
-            },
-          ]}
-          copyright={`© ${new Date().getFullYear()} Chessvine. All rights reserved.`}
+          logo={footerLogo}
+          tagline={SITE_TAGLINE}
+          menuItems={footerMenu}
+          copyright={`© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`}
           bottomLinks={[
             { text: "Privacy Policy", url: "/privacy" },
             { text: "Terms of Service", url: "/terms" },

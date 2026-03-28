@@ -1,52 +1,33 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { Footer2 } from "@/components/footer2";
 import { StructuredData } from "@/components/structured-data";
+import { getAppUrl, getMarketingSiteUrl, SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chessvine.com";
+const siteUrl = getMarketingSiteUrl();
+const appUrl = getAppUrl();
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Learn about Chessvine - Our mission to help chess players improve their game through AI-powered analysis and personalized learning. Discover our values, mission, and commitment to chess improvement.",
+  title: "About",
+  description: `Learn about ${SITE_NAME}—conversational rental search, map-based discovery, and listing tools aligned with the RentFit web app.`,
   keywords: [
-    "chessvine about",
-    "chess platform mission",
-    "chess improvement",
-    "AI chess analysis",
-    "chess training platform",
+    "RentFit about",
+    "rental marketplace",
+    "AI rental search",
   ],
   openGraph: {
-    title: "About Chessvine - Our Mission & Values",
-    description:
-      "Learn about Chessvine - Our mission to help chess players improve their game through AI-powered analysis and personalized learning. Discover our values, mission, and commitment to chess improvement.",
+    title: `About ${SITE_NAME}`,
+    description: `Our mission is to make discovering and listing rentals clearer—with the same Ask RentFit experience you use in the product.`,
     url: `${siteUrl}/about`,
-    siteName: "Chessvine",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        width: 1200,
-        height: 630,
-        alt: "Chessvine - About Us",
-        type: "image/png",
-      },
-    ],
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "About Chessvine - Our Mission & Values",
-    description:
-      "Learn about Chessvine - Our mission to help chess players improve their game through AI-powered analysis and personalized learning.",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        alt: "Chessvine - About Us",
-      },
-    ],
-    creator: "@chessvine",
-    site: "@chessvine",
+    card: "summary",
+    title: `About ${SITE_NAME}`,
+    description: `Natural-language search, maps, and chat for renters and owners.`,
   },
   alternates: {
     canonical: `${siteUrl}/about`,
@@ -60,18 +41,42 @@ export const metadata: Metadata = {
 const aboutPageSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  name: "About Chessvine",
-  description:
-    "Learn about Chessvine - Our mission to help chess players improve their game through AI-powered analysis and personalized learning.",
+  name: `About ${SITE_NAME}`,
+  description: `Learn about ${SITE_NAME} and the rental discovery experience.`,
   url: `${siteUrl}/about`,
   mainEntity: {
     "@type": "Organization",
-    name: "Chessvine",
+    name: SITE_NAME,
     description:
-      "AI-powered chess game analysis platform helping players improve their game through AI-driven insights and personalized learning.",
+      "Rental marketplace focused on conversational search, map-based listings, and owner tools.",
     url: siteUrl,
   },
 };
+
+const footerMenu = [
+  {
+    title: "Product",
+    links: [
+      { text: "Features", url: "/#features" },
+      { text: "Pricing", url: "/#pricing" },
+      { text: "FAQ", url: "/#faq" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { text: "About", url: "/about" },
+      { text: "Contact", url: "/#contact" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { text: "Privacy Policy", url: "/privacy" },
+      { text: "Terms of Service", url: "/terms" },
+    ],
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -82,110 +87,107 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              About Chessvine
+              About {SITE_NAME}
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Empowering chess players to reach their full potential through
-              AI-powered analysis and personalized learning.
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              {SITE_TAGLINE} This marketing site exists to explain the product;
+              the live experience is in the{" "}
+              <Link href={appUrl} className="text-primary underline-offset-4 hover:underline">
+                RentFit app
+              </Link>
+              .
             </p>
           </div>
 
           <div className="space-y-16">
-            <section className="space-y-6 container mx-auto">
+            <section className="space-y-6">
               <h2 className="text-3xl font-bold text-foreground mb-6">
-                Our Mission
+                Mission
               </h2>
-              <div className="space-y-4 text-base text-muted-foreground">
+              <div className="space-y-4 text-base text-muted-foreground max-w-3xl">
                 <p>
-                  At Chessvine, we believe that every chess player deserves
-                  access to world-class analysis and training tools. Our mission
-                  is to democratize chess improvement by leveraging cutting-edge
-                  artificial intelligence to provide personalized insights,
-                  customized training, and actionable feedback that helps
-                  players of all levels elevate their game.
+                  Renting should not mean filling out ten filters before you see
+                  a map. {SITE_NAME} takes cues from the main app: you describe
+                  what you need, land in a chat plus map workspace, and iterate
+                  with an assistant while listings stay in context.
                 </p>
                 <p>
-                  We&apos;re committed to making chess improvement accessible,
-                  engaging, and effective. Whether you&apos;re a beginner
-                  looking to learn the fundamentals or an experienced player
-                  aiming for mastery, Chessvine provides the tools you need to
-                  checkmate your limits.
+                  Owners belong in the same ecosystem—list properties with the
+                  same backend and auth model as{" "}
+                  <code className="rounded bg-muted px-1 py-0.5 text-sm">
+                    rentfit-v1-web
+                  </code>
+                  , so marketing copy and product behavior stay aligned.
                 </p>
               </div>
             </section>
 
-            <section className="space-y-6 container mx-auto">
+            <section className="space-y-6">
               <h2 className="text-3xl font-bold text-foreground mb-6">
-                Our Values
+                Values
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-6 rounded-xl border-0 dark:border-0 bg-card space-y-2 shadow-[0_10px_40px_rgb(0,0,0,0.08),0_4px_12px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_12px_rgb(0,0,0,0.3),inset_0_1px_0_rgb(255,255,255,0.05)]">
                   <h3 className="text-lg font-semibold text-foreground">
-                    Excellence
+                    Clarity
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    We strive for excellence in everything we do, from the
-                    quality of our AI analysis to the user experience of our
-                    platform.
+                    Plain-language search, obvious next steps, and honest
+                    messaging about what the assistant can and cannot do.
                   </p>
                 </div>
                 <div className="p-6 rounded-xl border-0 dark:border-0 bg-card space-y-2 shadow-[0_10px_40px_rgb(0,0,0,0.08),0_4px_12px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_12px_rgb(0,0,0,0.3),inset_0_1px_0_rgb(255,255,255,0.05)]">
                   <h3 className="text-lg font-semibold text-foreground">
-                    Accessibility
+                    Place on the map
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Chess improvement should be accessible to everyone,
-                    regardless of skill level or financial resources. We&apos;re
-                    committed to breaking down barriers.
+                    Rentals are spatial; the product keeps geography and
+                    conversation side by side instead of hiding the map behind
+                    forms.
                   </p>
                 </div>
                 <div className="p-6 rounded-xl border-0 dark:border-0 bg-card space-y-2 shadow-[0_10px_40px_rgb(0,0,0,0.08),0_4px_12px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_12px_rgb(0,0,0,0.3),inset_0_1px_0_rgb(255,255,255,0.05)]">
                   <h3 className="text-lg font-semibold text-foreground">
-                    Innovation
+                    Pragmatic AI
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    We continuously push the boundaries of what&apos;s possible
-                    with AI and chess analysis, always looking for new ways to
-                    help players improve.
+                    The assistant is a guide—not a replacement for viewing
+                    listings, verifying details, or doing your own diligence.
                   </p>
                 </div>
                 <div className="p-6 rounded-xl border-0 dark:border-0 bg-card space-y-2 shadow-[0_10px_40px_rgb(0,0,0,0.08),0_4px_12px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_12px_rgb(0,0,0,0.3),inset_0_1px_0_rgb(255,255,255,0.05)]">
                   <h3 className="text-lg font-semibold text-foreground">
-                    Community Focus
+                    India-first rentals
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    We&apos;re built by chess players, for chess players. Our
-                    platform is designed with the chess community in mind, and
-                    we&apos;re always listening to feedback to make Chessvine
-                    better.
+                    Service areas and listing formats follow the RentFit backend
+                    (for example Bangalore, Mumbai, and Kolkata) with room to
+                    grow.
                   </p>
                 </div>
               </div>
             </section>
 
-            <section className="space-y-6 container mx-auto bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 md:p-12">
+            <section className="space-y-6 bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 md:p-12">
               <h2 className="text-3xl font-bold text-foreground mb-4">
-                Join Our Journey
+                Try the app
               </h2>
-              <div className="space-y-4 text-base text-muted-foreground">
+              <div className="space-y-4 text-base text-muted-foreground max-w-3xl">
                 <p>
-                  Chessvine is more than just a platform—it&apos;s a community
-                  of dedicated chess players committed to improvement. Whether
-                  you&apos;re just starting your chess journey or looking to
-                  take your game to the next level, we&apos;re here to support
-                  you every step of the way.
+                  Open the RentFit web app to start from{" "}
+                  <strong>Ask RentFit</strong> on <code className="rounded bg-muted px-1 py-0.5 text-sm">/search</code>, then continue with map and chat—the flow this site is summarizing.
                 </p>
                 <p>
-                  Start your free preview today and experience the power of
-                  AI-driven chess improvement. Upload your first game, explore
-                  our analysis features, and discover how Chessvine can help you
-                  checkmate your limits.
-                </p>
-                <p className="mt-6">
-                  Start Free Preview or reach out to us at{" "}
+                  <Link
+                    href={appUrl}
+                    className="text-primary font-medium underline-offset-4 hover:underline"
+                  >
+                    Go to app →
+                  </Link>
+                  {" · "}
                   <a
                     href="mailto:supratik.deagle@gmail.com"
-                    className="text-primary hover:underline font-medium"
+                    className="text-primary font-medium underline-offset-4 hover:underline"
                   >
                     supratik.deagle@gmail.com
                   </a>
@@ -196,37 +198,14 @@ export default function AboutPage() {
         </div>
         <Footer2
           logo={{
-            src: "/app-logo.png",
-            alt: "Chessvine",
-            title: "Chessvine",
             url: "/",
+            src: "/logo.png",
+            alt: SITE_NAME,
+            title: SITE_NAME,
           }}
-          tagline="Checkmate your limits with AI-driven chess improvement."
-          menuItems={[
-            {
-              title: "Product",
-              links: [
-                { text: "Features", url: "/#features" },
-                { text: "Pricing", url: "/#pricing" },
-                { text: "FAQ", url: "/#faq" },
-              ],
-            },
-            {
-              title: "Company",
-              links: [
-                { text: "About", url: "/about" },
-                { text: "Contact", url: "/#contact" },
-              ],
-            },
-            {
-              title: "Legal",
-              links: [
-                { text: "Privacy Policy", url: "/privacy" },
-                { text: "Terms of Service", url: "/terms" },
-              ],
-            },
-          ]}
-          copyright={`© ${new Date().getFullYear()} Chessvine. All rights reserved.`}
+          tagline={SITE_TAGLINE}
+          menuItems={footerMenu}
+          copyright={`© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`}
           bottomLinks={[
             { text: "Privacy Policy", url: "/privacy" },
             { text: "Terms of Service", url: "/terms" },

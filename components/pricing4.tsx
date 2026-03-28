@@ -5,11 +5,14 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 
+import { getAppUrl } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+
+const APP_URL = getAppUrl();
 
 interface PricingPlan {
   name: string;
@@ -74,6 +77,7 @@ const Pricing4 = ({
     },
   ],
   className,
+  id = "pricing",
 }: Pricing4Props) => {
   const [isAnnually] = useState(false);
   const ref = useRef(null);
@@ -81,7 +85,7 @@ const Pricing4 = ({
 
   return (
     <section
-      id="pricing"
+      id={id}
       ref={ref}
       className={cn("py-16 sm:py-24 md:py-32", className)}
     >
@@ -143,9 +147,11 @@ const Pricing4 = ({
           </div>
           <div className="flex w-full flex-col items-stretch gap-6 md:flex-row">
             {plans.map((plan, index) => {
-              const isFreePlan =
-                plan.monthlyPrice === "$0" || plan.name === "Free";
-              const isDisabled = !isFreePlan;
+              const isZeroPrice =
+                plan.monthlyPrice === "$0" || plan.monthlyPrice === "₹0";
+              const isOpenApp = plan.buttonText === "Open app";
+              const isEnabledPlan = isOpenApp || isZeroPrice;
+              const isDisabled = !isEnabledPlan;
 
               return (
                 <motion.div
@@ -170,7 +176,7 @@ const Pricing4 = ({
                   </span>
                   <p
                     className={`text-muted-foreground ${
-                      plan.monthlyPrice === "$0" ? "invisible" : ""
+                      isZeroPrice ? "invisible" : ""
                     }`}
                   >
                     {isAnnually ? "Per year" : "Per month"}
@@ -188,11 +194,9 @@ const Pricing4 = ({
                         </li>
                       ))}
                     </ul>
-                    {plan.buttonText === "Start Free Preview" ? (
+                    {plan.buttonText === "Open app" ? (
                       <Button className="w-full" asChild>
-                        <Link href="https://chessvine-web-881017844394.asia-south1.run.app/">
-                          {plan.buttonText}
-                        </Link>
+                        <Link href={APP_URL}>{plan.buttonText}</Link>
                       </Button>
                     ) : (
                       <Button className="w-full" disabled={isDisabled}>

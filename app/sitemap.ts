@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
+import { getMarketingSiteUrl } from "@/lib/site-config";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chessvine.com";
+const siteUrl = getMarketingSiteUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about", "/privacy", "/terms"];

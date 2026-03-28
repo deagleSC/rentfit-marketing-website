@@ -2,50 +2,35 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/navbar";
 import { Footer2 } from "@/components/footer2";
 import { StructuredData } from "@/components/structured-data";
+import {
+  getMarketingSiteUrl,
+  SITE_NAME,
+  SITE_TAGLINE,
+} from "@/lib/site-config";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chessvine.com";
+const siteUrl = getMarketingSiteUrl();
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description:
-    "Chessvine Privacy Policy - Learn how we collect, use, and protect your data. Understand your privacy rights and how we handle your personal information.",
+  description: `${SITE_NAME} privacy policy — how we collect, use, and protect your data on this marketing site and when you use the product.`,
   keywords: [
-    "chessvine privacy policy",
+    "RentFit privacy",
     "data protection",
     "privacy rights",
-    "chess platform privacy",
+    "rental platform privacy",
   ],
   openGraph: {
-    title: "Privacy Policy - Chessvine",
-    description:
-      "Chessvine Privacy Policy - Learn how we collect, use, and protect your data. Understand your privacy rights and how we handle your personal information.",
+    title: `Privacy Policy — ${SITE_NAME}`,
+    description: `How ${SITE_NAME} handles personal information.`,
     url: `${siteUrl}/privacy`,
-    siteName: "Chessvine",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        width: 1200,
-        height: 630,
-        alt: "Chessvine - Privacy Policy",
-        type: "image/png",
-      },
-    ],
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Privacy Policy - Chessvine",
-    description:
-      "Chessvine Privacy Policy - Learn how we collect, use, and protect your data.",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        alt: "Chessvine - Privacy Policy",
-      },
-    ],
-    creator: "@chessvine",
-    site: "@chessvine",
+    card: "summary",
+    title: `Privacy Policy — ${SITE_NAME}`,
+    description: `How ${SITE_NAME} handles personal information.`,
   },
   alternates: {
     canonical: `${siteUrl}/privacy`,
@@ -60,8 +45,7 @@ const privacyPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   name: "Privacy Policy",
-  description:
-    "Chessvine Privacy Policy - Learn how we collect, use, and protect your data.",
+  description: `${SITE_NAME} privacy policy.`,
   url: `${siteUrl}/privacy`,
 };
 
@@ -82,11 +66,11 @@ export default function PrivacyPage() {
           <div className="space-y-6 text-sm text-muted-foreground">
             <section className="space-y-4">
               <p>
-                Your privacy is important to us. It is Chessvine&apos;s policy
+                Your privacy is important to us. It is {SITE_NAME}&apos;s policy
                 to respect your privacy and comply with any applicable law and
                 regulation regarding any personal information we may collect
-                about you, including across our website, chessvine.com, and
-                other sites we own and operate.
+                about you, including on this marketing site ({siteUrl}), the
+                RentFit product, and other sites we operate.
               </p>
               <p>
                 Personal information is any information about you which can be
@@ -235,12 +219,12 @@ export default function PrivacyPage() {
                     include:
                   </p>
                   <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
-                    <li>PGN (Portable Game Notation) files you upload</li>
-                    <li>Chess game analysis results and insights</li>
-                    <li>Generated puzzles based on your games</li>
+                    <li>Search prompts, chat messages, and session metadata</li>
+                    <li>Listing content and media you submit as an owner</li>
+                    <li>Map interactions and discovery events</li>
                     <li>User profiles and preferences</li>
                     <li>Analytics data and usage metrics</li>
-                    <li>Learning paths and progress tracking</li>
+                    <li>Support conversations and contact form submissions</li>
                   </ul>
                 </div>
               </div>
@@ -268,12 +252,11 @@ export default function PrivacyPage() {
               </p>
               <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
                 <li>Register for an account or sign in</li>
-                <li>Upload PGN files for analysis</li>
-                <li>Use our AI-powered game analysis features</li>
-                <li>Generate and practice with customized puzzles</li>
-                <li>Access personalized learning paths</li>
+                <li>Register or sign in to the RentFit app</li>
+                <li>Use conversational search, chat, and map features</li>
+                <li>Create or manage rental listings</li>
                 <li>Contact us via email or contact form</li>
-                <li>Subscribe to our newsletter or updates</li>
+                <li>Subscribe to updates when offered</li>
               </ul>
               <p className="mt-2">
                 We may combine voluntarily provided and automatically collected
@@ -357,12 +340,16 @@ export default function PrivacyPage() {
                   Google&apos;s privacy policy applies to OAuth data.
                 </li>
                 <li>
-                  <strong>Google Cloud Storage:</strong> For storing your PGN
-                  files and analysis data securely.
+                  <strong>Cloud hosting &amp; database:</strong> Infrastructure
+                  providers that host the RentFit API, database, and related
+                  services (for example Vercel, MongoDB Atlas, or comparable
+                  vendors—see your deployment configuration).
                 </li>
                 <li>
-                  <strong>Google Gemini AI:</strong> For analyzing your chess
-                  games and generating AI-powered insights and recommendations.
+                  <strong>AI model providers:</strong> Large-language-model APIs
+                  used for chat and search assistance in the product (for
+                  example OpenRouter or other providers configured in the
+                  backend).
                 </li>
               </ul>
             </section>
@@ -547,12 +534,12 @@ export default function PrivacyPage() {
         </div>
         <Footer2
           logo={{
-            src: "/app-logo.png",
-            alt: "Chessvine",
-            title: "Chessvine",
             url: "/",
+            src: "/logo.png",
+            alt: SITE_NAME,
+            title: SITE_NAME,
           }}
-          tagline="Checkmate your limits with AI-driven chess improvement."
+          tagline={SITE_TAGLINE}
           menuItems={[
             {
               title: "Product",
@@ -577,7 +564,7 @@ export default function PrivacyPage() {
               ],
             },
           ]}
-          copyright={`© ${new Date().getFullYear()} Chessvine. All rights reserved.`}
+          copyright={`© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`}
           bottomLinks={[
             { text: "Privacy Policy", url: "/privacy" },
             { text: "Terms of Service", url: "/terms" },

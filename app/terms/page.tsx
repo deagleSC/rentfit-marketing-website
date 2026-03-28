@@ -2,50 +2,35 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/navbar";
 import { Footer2 } from "@/components/footer2";
 import { StructuredData } from "@/components/structured-data";
+import {
+  getMarketingSiteUrl,
+  SITE_NAME,
+  SITE_TAGLINE,
+} from "@/lib/site-config";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chessvine.com";
+const siteUrl = getMarketingSiteUrl();
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description:
-    "Chessvine Terms of Service - Read the rules and guidelines for using our AI-powered chess analysis platform. Understand your rights and responsibilities.",
+  description: `${SITE_NAME} terms — rules for using this marketing site and the RentFit product.`,
   keywords: [
-    "chessvine terms of service",
+    "RentFit terms",
     "terms and conditions",
-    "chess platform terms",
+    "rental platform terms",
     "user agreement",
   ],
   openGraph: {
-    title: "Terms of Service - Chessvine",
-    description:
-      "Chessvine Terms of Service - Read the rules and guidelines for using our AI-powered chess analysis platform. Understand your rights and responsibilities.",
+    title: `Terms of Service — ${SITE_NAME}`,
+    description: `Terms for ${SITE_NAME} and related services.`,
     url: `${siteUrl}/terms`,
-    siteName: "Chessvine",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        width: 1200,
-        height: 630,
-        alt: "Chessvine - Terms of Service",
-        type: "image/png",
-      },
-    ],
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Terms of Service - Chessvine",
-    description:
-      "Chessvine Terms of Service - Read the rules and guidelines for using our platform.",
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        alt: "Chessvine - Terms of Service",
-      },
-    ],
-    creator: "@chessvine",
-    site: "@chessvine",
+    card: "summary",
+    title: `Terms of Service — ${SITE_NAME}`,
+    description: `Terms for ${SITE_NAME} and related services.`,
   },
   alternates: {
     canonical: `${siteUrl}/terms`,
@@ -60,8 +45,7 @@ const termsPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   name: "Terms of Service",
-  description:
-    "Chessvine Terms of Service - Read the rules and guidelines for using our platform.",
+  description: `${SITE_NAME} terms of service.`,
   url: `${siteUrl}/terms`,
 };
 
@@ -85,9 +69,9 @@ export default function TermsPage() {
                 1. Acceptance of Terms
               </h2>
               <p>
-                By accessing or using Chessvine, you agree to be bound by these
-                Terms of Service. If you disagree with any part of these terms,
-                you may not access the service.
+                By accessing or using {SITE_NAME} (this site or the product app),
+                you agree to these Terms of Service. If you disagree with any
+                part of these terms, you may not access the service.
               </p>
             </section>
 
@@ -96,10 +80,11 @@ export default function TermsPage() {
                 2. Description of Service
               </h2>
               <p>
-                Chessvine is an AI-powered chess game analysis platform that
-                allows users to upload PGN files, receive detailed game
-                analysis, and practice with generated puzzles. The service uses
-                artificial intelligence to provide insights and recommendations.
+                {SITE_NAME} is a rental discovery and listing platform. Renters
+                can search in natural language, view listings on a map, and chat
+                with an assistant. Owners can publish listings subject to
+                product availability and moderation. AI-generated responses are
+                assistive and may be incomplete or inaccurate.
               </p>
             </section>
 
@@ -156,10 +141,10 @@ export default function TermsPage() {
                     Your Content
                   </h3>
                   <p>
-                    You retain ownership of the PGN files and chess games you
-                    upload. By uploading content, you grant us a license to
-                    process, analyze, and store your content to provide the
-                    service.
+                    You retain ownership of listings, photos, and descriptions you
+                    submit. By uploading content, you grant {SITE_NAME} a license
+                    to host, display, process, and distribute that content to
+                    operate the marketplace and assistant features.
                   </p>
                 </div>
                 <div>
@@ -167,9 +152,9 @@ export default function TermsPage() {
                     Our Content
                   </h3>
                   <p>
-                    All content, features, and functionality of Chessvine,
-                    including analysis results, are owned by Chessvine and
-                    protected by intellectual property laws.
+                    All content, features, and functionality of {SITE_NAME},
+                    excluding your submitted materials, are owned by {SITE_NAME}{" "}
+                    or its licensors and protected by intellectual property laws.
                   </p>
                 </div>
               </div>
@@ -193,11 +178,11 @@ export default function TermsPage() {
                 7. AI-Generated Content
               </h2>
               <p>
-                Analysis results and insights are generated by artificial
-                intelligence and are provided for educational and entertainment
-                purposes. While we strive for accuracy, the AI analysis may
-                contain errors or inaccuracies. You should not rely solely on
-                AI-generated analysis for critical decisions.
+                Assistant messages and summaries are generated with AI. They are
+                not legal, financial, or property advice. Listings must be
+                verified directly with owners or agents. {SITE_NAME} is not
+                liable for decisions you make based on AI output or third-party
+                listing content.
               </p>
             </section>
 
@@ -206,7 +191,7 @@ export default function TermsPage() {
                 8. Limitation of Liability
               </h2>
               <p>
-                To the maximum extent permitted by law, Chessvine shall not be
+                To the maximum extent permitted by law, {SITE_NAME} shall not be
                 liable for any indirect, incidental, special, consequential, or
                 punitive damages, or any loss of profits or revenues, whether
                 incurred directly or indirectly, or any loss of data, use,
@@ -273,12 +258,12 @@ export default function TermsPage() {
         </div>
         <Footer2
           logo={{
-            src: "/app-logo.png",
-            alt: "Chessvine",
-            title: "Chessvine",
             url: "/",
+            src: "/logo.png",
+            alt: SITE_NAME,
+            title: SITE_NAME,
           }}
-          tagline="Checkmate your limits with AI-driven chess improvement."
+          tagline={SITE_TAGLINE}
           menuItems={[
             {
               title: "Product",
@@ -303,7 +288,7 @@ export default function TermsPage() {
               ],
             },
           ]}
-          copyright={`© ${new Date().getFullYear()} Chessvine. All rights reserved.`}
+          copyright={`© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`}
           bottomLinks={[
             { text: "Privacy Policy", url: "/privacy" },
             { text: "Terms of Service", url: "/terms" },

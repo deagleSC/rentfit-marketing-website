@@ -31,8 +31,9 @@ interface Feature1Props {
 }
 
 const Feature1 = ({
-  title = "AI-Powered Game Analysis",
-  description = "Upload your PGN files and get detailed AI-driven insights into your games. Understand your mistakes, identify patterns, and discover opportunities for improvement.",
+  title = "AI-assisted rental search",
+  description =
+    "Describe neighborhoods, budget, and must-haves in plain language. RentFit helps surface listings that fit what you asked for.",
   imageSrc,
   imageSrcLight,
   imageSrcDark,
@@ -53,17 +54,21 @@ const Feature1 = ({
     setMounted(true);
   }, []);
 
-  // Determine which image to use based on theme
-  const getImageSrc = (): string => {
-    if (imageSrc) return imageSrc; // Fallback to single imageSrc if provided
-    const fallback =
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg";
-    if (!mounted) return imageSrcLight || imageSrcDark || fallback; // Default to light during SSR
+  const hasCustomImage = Boolean(
+    imageSrc || imageSrcLight || imageSrcDark,
+  );
+
+  // Determine which image to use based on theme (only when paths are provided).
+  const getImageSrc = (): string | null => {
+    if (imageSrc) return imageSrc;
+    if (!mounted) return imageSrcLight || imageSrcDark || null;
     const currentTheme = resolvedTheme || theme;
     return currentTheme === "dark"
-      ? imageSrcDark || imageSrcLight || fallback
-      : imageSrcLight || imageSrcDark || fallback;
+      ? imageSrcDark || imageSrcLight || null
+      : imageSrcLight || imageSrcDark || null;
   };
+
+  const resolvedSrc = hasCustomImage ? getImageSrc() : null;
 
   const textDirection = imagePosition === "left" ? -1 : 1;
   const imageDirection = imagePosition === "left" ? 1 : -1;
@@ -143,13 +148,23 @@ const Feature1 = ({
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl blur-3xl -z-10 group-hover:blur-xl transition-all duration-500" />
             <div className="relative overflow-hidden rounded-xl border border-border/50 shadow-lg group-hover:shadow-xl transition-all duration-300">
-              <Image
-                src={getImageSrc()}
-                alt={imageAlt}
-                width={800}
-                height={500}
-                className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
-              />
+              {resolvedSrc ? (
+                <Image
+                  src={resolvedSrc}
+                  alt={imageAlt}
+                  width={800}
+                  height={500}
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div
+                  className="flex min-h-[280px] w-full items-center justify-center bg-muted/40 px-6 py-16 text-center text-sm text-muted-foreground"
+                  role="img"
+                  aria-label={imageAlt}
+                >
+                  Image placeholder — add screenshots later.
+                </div>
+              )}
             </div>
           </motion.div>
         </div>

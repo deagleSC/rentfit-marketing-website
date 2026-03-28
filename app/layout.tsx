@@ -1,92 +1,64 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Outfit } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import {
+  getMarketingSiteUrl,
+  KEYWORDS,
+  SITE_DESCRIPTION,
+  SITE_DESCRIPTION_LONG,
+  SITE_NAME,
+} from "@/lib/site-config";
 import "./globals.css";
 
-const montserrat = Montserrat({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://chessvine.com";
-const siteName = "Chessvine";
-const siteDescription =
-  "AI-powered chess game analysis platform. Upload your PGN files, get detailed insights, practice puzzles, and improve your chess game. Checkmate your limits with Chessvine.";
+const siteUrl = getMarketingSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Chessvine - Checkmate your limits | AI Chess Analysis Platform",
-    template: "%s | Chessvine",
+    default: `${SITE_NAME} — ${SITE_DESCRIPTION}`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: siteDescription,
-  keywords: [
-    "chess analysis",
-    "chess AI",
-    "PGN analyzer",
-    "chess game analysis",
-    "chess training",
-    "chess puzzles",
-    "chess improvement",
-    "chess insights",
-    "chess strategy",
-    "chess tactics",
-    "online chess",
-    "chess platform",
-  ],
-  authors: [{ name: "Chessvine Team" }],
-  creator: "Chessvine",
-  publisher: "Chessvine",
+  description: SITE_DESCRIPTION_LONG,
+  keywords: [...KEYWORDS],
+  authors: [{ name: `${SITE_NAME} Team` }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  icons: {
-    icon: [
-      { url: "/app-logo.png", type: "image/png", sizes: "32x32" },
-      { url: "/app-logo.png", type: "image/png", sizes: "16x16" },
-      { url: "/app-logo.png", type: "image/png", sizes: "192x192" },
-      { url: "/app-logo.png", type: "image/png", sizes: "512x512" },
-    ],
-    apple: [
-      { url: "/app-logo.png", type: "image/png", sizes: "180x180" },
-    ],
-    shortcut: "/app-logo.png",
-  },
+  // Tab / PWA icons: `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico` (file convention — overrides metadata.icons).
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: siteName,
-    title: "Chessvine - Checkmate your limits | AI Chess Analysis Platform",
-    description: siteDescription,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — ${SITE_DESCRIPTION}`,
+    description: SITE_DESCRIPTION_LONG,
     images: [
       {
-        url: `${siteUrl}/app-logo.png`,
-        width: 1200,
-        height: 630,
-        alt: "Chessvine - AI Chess Analysis Platform",
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: SITE_NAME,
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chessvine - Checkmate your limits | AI Chess Analysis Platform",
-    description: siteDescription,
-    images: [
-      {
-        url: `${siteUrl}/app-logo.png`,
-        alt: "Chessvine - AI Chess Analysis Platform",
-      },
-    ],
-    creator: "@chessvine",
-    site: "@chessvine",
+    title: `${SITE_NAME} — ${SITE_DESCRIPTION}`,
+    description: SITE_DESCRIPTION_LONG,
+    images: [{ url: "/logo.png", alt: SITE_NAME }],
   },
   robots: {
     index: true,
@@ -102,13 +74,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
-  category: "Chess Analysis",
+  category: "Real estate",
   manifest: "/manifest.json",
-  verification: {
-    // Add verification codes here when available
-    // google: "verification-code",
-    // yandex: "verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -117,8 +84,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={montserrat.variable} suppressHydrationWarning>
-      <body className={`${montserrat.variable} antialiased`}>
+    <html lang="en" className={outfit.variable} suppressHydrationWarning>
+      <body className={`${outfit.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
           <Toaster />
