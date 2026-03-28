@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  // Tab / PWA icons: `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico` (file convention — overrides metadata.icons).
+  // Favicons: `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico` (Next.js file convention).
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -75,7 +75,6 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   category: "Real estate",
-  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
